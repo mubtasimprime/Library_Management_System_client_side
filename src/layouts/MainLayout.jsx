@@ -1,7 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router";
 
 const MainLayout = () => {
-  return <div></div>;
+  return (
+    <>
+      <Outlet></Outlet>
+    </>
+  );
 };
 
 export default MainLayout;
