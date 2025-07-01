@@ -3,6 +3,9 @@ import MainLayout from "../layouts/MainLayout";
 import { Suspense } from "react";
 import Loading from "../components/Loading";
 import Home from "../pages/Home";
+import AllBooks from "../pages/AllBooks";
+import AddBooks from "../pages/AddBooks";
+import BorrowedBooks from "../pages/BorrowedBooks";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +19,18 @@ const router = createBrowserRouter([
             <Home></Home>
           </Suspense>
         ),
+      },
+      {
+        path: "/all-books",
+        element: <AllBooks></AllBooks>,
+      },
+      {
+        path: "/add-books",
+        element: <AddBooks></AddBooks>,
+      },
+      {
+        path: "/borrowed-books",
+        element: <BorrowedBooks></BorrowedBooks>,
       },
     ],
   },
