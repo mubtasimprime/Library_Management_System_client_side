@@ -136,8 +136,32 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+
+      {/* Avatar */}
+      <div className="navbar-end gap-4">
+        <div
+          className="avatar tooltip tooltip-bottom"
+          // data-tip={user?.displayName || "Guest"}
+        >
+          <div className="ring-primary ring-offset-base-100 w-7 rounded-full ring-2 ring-offset-2">
+            <img
+              src={
+                // user?.photoURL ||
+                "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+              }
+              alt="User avatar"
+            />
+          </div>
+        </div>
+
+        <>
+          <Link to="/auth/login" className="navbar-btn">
+            LogIn
+          </Link>
+          <Link to="/auth/register" className="navbar-btn">
+            SignIn
+          </Link>
+        </>
       </div>
     </section>
   );
