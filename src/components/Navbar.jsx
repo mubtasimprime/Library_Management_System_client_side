@@ -155,10 +155,10 @@ const Navbar = () => {
         </div>
 
         <>
-          <Link to="/auth/login" className="navbar-btn">
+          <Link to="/login" className="navbar-btn">
             LogIn
           </Link>
-          <Link to="/auth/register" className="navbar-btn">
+          <Link to="/register" className="navbar-btn">
             SignIn
           </Link>
         </>

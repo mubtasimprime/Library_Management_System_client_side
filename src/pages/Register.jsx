@@ -1,13 +1,32 @@
-import React from "react";
+import { Link } from "react-router";
+import { AuthContext } from "../context/AuthContext/AuthContext";
+import { useContext } from "react";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    //create user
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
-    <section className="flex justify-center h-[calc(100vh-91px)] items-center">
+    <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 border-2 border-zinc-300">
         <h2 className="font-bold text-[26px] text-center text-[#2f2f2f] mt-4">
           Register your account
         </h2>
-        <form className="card-body">
+        <form onSubmit={handleRegister} className="card-body">
           <fieldset className="fieldset font-semibold text-[14px]">
             <button
               aria-label="Login with Google"

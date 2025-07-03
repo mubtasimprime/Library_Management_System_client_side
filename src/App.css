@@ -1,6 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
 
 .navbar-btn {
   @apply cursor-pointer text-white text-[14px] lg:text-base font-medium py-1 px-4 lg:py-1 lg:px-5 rounded-tl-lg rounded-br-lg hover:bg-white hover:text-blue-600 border border-blue-600 bg-blue-600 duration-300;
+}
+
+.font {
+  font-family: "Montserrat", sans-serif;
 }
