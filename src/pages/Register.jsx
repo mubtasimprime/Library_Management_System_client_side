@@ -1,15 +1,24 @@
 import { Link } from "react-router";
 import { AuthContext } from "../context/AuthContext/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const [nameError, setNameError] = useState("");
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
+    if (name.length < 5) {
+      setNameError("Name should be more than 5 character");
+      return;
+    } else {
+      setNameError("");
+    }
     const email = form.email.value;
+    const photo = form.photo.value;
     const password = form.password.value;
-    console.log(email, password);
+    console.log(name, photo, email, password);
 
     //create user
     createUser(email, password)

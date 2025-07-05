@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Login = () => {
   return (
-    <section className="flex justify-center h-[calc(100vh-91px)] items-center">
+    <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 border-2 border-zinc-300">
         <h2 className="font-bold text-[26px] text-center text-[#2f2f2f] mt-4">
           Login your account
