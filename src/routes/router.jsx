@@ -8,6 +8,7 @@ import AddBooks from "../pages/AddBooks";
 import BorrowedBooks from "../pages/BorrowedBooks";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import AuthLayout from "../layouts/AuthLayout";
 
 const router = createBrowserRouter([
   {
@@ -34,12 +35,18 @@ const router = createBrowserRouter([
         path: "/borrowed-books",
         element: <BorrowedBooks></BorrowedBooks>,
       },
+    ],
+  },
+  {
+    path: "auth",
+    element: <AuthLayout></AuthLayout>,
+    children: [
       {
-        path: "/login",
+        path: "/auth/login",
         element: <Login></Login>,
       },
       {
-        path: "/register",
+        path: "/auth/register",
         element: <Register></Register>,
       },
     ],

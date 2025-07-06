@@ -1,9 +1,10 @@
 import { Link } from "react-router";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { signUpWithEmail, setUser } = useContext(AuthContext);
   const [nameError, setNameError] = useState("");
   const handleRegister = (e) => {
     e.preventDefault();
@@ -21,13 +22,16 @@ const Register = () => {
     console.log(name, photo, email, password);
 
     //create user
-    createUser(email, password)
+    signUpWithEmail(email, password)
       .then((result) => {
-        console.log(result.user);
+        setUser(result.user);
       })
       .catch((error) => {
         console.log(error);
       });
+    toast.success("Register successful!", {
+      autoClose: 1500,
+    });
   };
   return (
     <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">

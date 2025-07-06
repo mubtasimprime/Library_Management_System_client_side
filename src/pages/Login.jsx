@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../context/AuthContext/AuthContext";
 
 const Login = () => {
+  const { signInWithEmail } = useContext(AuthContext);
   return (
     <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 border-2 border-zinc-300">

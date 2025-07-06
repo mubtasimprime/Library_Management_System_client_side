@@ -1,9 +1,12 @@
 import { Link, NavLink } from "react-router";
 import Logo from "../assets/open-book.png";
+import { use } from "react";
+import { AuthContext } from "../context/AuthContext/AuthContext";
 
 const Navbar = () => {
+  const { user } = use(AuthContext);
   return (
-    <section className="flex max-w-11/12 mx-auto py-2.5">
+    <section className="flex max-w-10/12 mx-auto py-2.5">
       {/* Dropmenu Responsive */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -139,29 +142,38 @@ const Navbar = () => {
 
       {/* Avatar */}
       <div className="navbar-end gap-4">
-        <div
-          className="avatar tooltip tooltip-bottom"
-          // data-tip={user?.displayName || "Guest"}
-        >
-          <div className="ring-primary ring-offset-base-100 w-7 rounded-full ring-2 ring-offset-2">
-            <img
-              src={
-                // user?.photoURL ||
-                "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-              }
-              alt="User avatar"
-            />
+        {user ? (
+          <div
+            className="avatar tooltip tooltip-bottom"
+            data-tip={user?.displayName || "Guest"}
+          >
+            <div className="ring-primary ring-offset-base-100 w-7 rounded-full ring-2 ring-offset-2">
+              <img
+                src={
+                  user?.photoURL ||
+                  "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                }
+                alt="User avatar"
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
 
-        <>
-          <Link to="/login" className="navbar-btn">
-            LogIn
-          </Link>
-          <Link to="/register" className="navbar-btn">
-            SignIn
-          </Link>
-        </>
+        {user ? (
+          <Link className="navbar-btn">LogOut</Link>
+        ) : (
+          <>
+            {" "}
+            <Link to="/auth/login" className="navbar-btn">
+              LogIn
+            </Link>
+            <Link to="/auth/register" className="navbar-btn">
+              SignIn
+            </Link>
+          </>
+        )}
       </div>
     </section>
   );
