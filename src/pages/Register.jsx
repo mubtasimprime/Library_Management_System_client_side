@@ -4,10 +4,22 @@ import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { signUpWithEmail, setUser, updateUser, user } =
+  const { signUpWithEmail, setUser, updateUser, signInWithGoogle } =
     useContext(AuthContext);
   const [nameError, setNameError] = useState("");
   const navigate = useNavigate();
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        console.log("ddddddd", error);
+      });
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -48,6 +60,7 @@ const Register = () => {
         // ..
       });
   };
+
   return (
     <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 border-2 border-zinc-300">
@@ -57,6 +70,7 @@ const Register = () => {
         <form onSubmit={handleRegister} className="card-body">
           <fieldset className="fieldset font-semibold text-[14px]">
             <button
+              onClick={handleGoogleSignIn}
               aria-label="Login with Google"
               type="button"
               className="flex p-3 border rounded-md cursor-pointer text-white bg-[#2f2f2f] hover:bg-black gap-4"

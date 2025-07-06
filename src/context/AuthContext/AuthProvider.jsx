@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
+import { toast } from "react-toastify";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -23,6 +26,26 @@ const AuthProvider = ({ children }) => {
   const signInWithEmail = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signInWithGoogle = () => {
+    setLoading(true);
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider)
+      .then((result) => {
+        setUser(result.user);
+        toast.success("Google login successful!", {
+          autoClose: 1500,
+        });
+        return result;
+      })
+      .catch((error) => {
+        toast.error(`Google login failed: ${error.message}`);
+        throw error;
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const updateUser = (updateData) => {
@@ -50,6 +73,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     signUpWithEmail,
     signInWithEmail,
+    signInWithGoogle,
     updateUser,
     logOut,
   };

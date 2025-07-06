@@ -4,10 +4,11 @@ import { AuthContext } from "../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { signInWithEmail } = useContext(AuthContext);
+  const { signInWithEmail, signInWithGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -28,6 +29,19 @@ const Login = () => {
         setError(errorCode);
       });
   };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        console.log("ddddddd", error);
+      });
+  };
+
   return (
     <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 border-2 border-zinc-300">
@@ -37,6 +51,7 @@ const Login = () => {
         <form onSubmit={handleLogin} className="card-body">
           <fieldset className="fieldset font-semibold text-[14px]">
             <button
+              onClick={handleGoogleSignIn}
               aria-label="Login with Google"
               type="button"
               className="flex p-3 border rounded-md cursor-pointer text-white bg-[#2f2f2f] hover:bg-black gap-4"
