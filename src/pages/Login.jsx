@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 
 const Login = () => {
   const { signInWithEmail } = useContext(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
-  const [Error, setError] = useState("");
+  const [error, setError] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -74,7 +75,7 @@ const Login = () => {
               <a className="link link-hover font-semibold">Forgot password?</a>
             </div>
 
-            {/* {error && <p className="text-red-400">{error}</p>} */}
+            {error && <p className="text-red-400">{error}</p>}
 
             <button
               type="submit"

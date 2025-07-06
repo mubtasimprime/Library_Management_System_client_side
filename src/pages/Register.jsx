@@ -1,11 +1,14 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { signUpWithEmail, setUser } = useContext(AuthContext);
+  const { signUpWithEmail, setUser, updateUser, user } =
+    useContext(AuthContext);
   const [nameError, setNameError] = useState("");
+  const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -19,19 +22,31 @@ const Register = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    // console.log(name, photo, email, password);
 
-    //create user
     signUpWithEmail(email, password)
       .then((result) => {
-        setUser(result.user);
+        const user = result.user;
+        updateUser({
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+            setUser(user);
+          });
+        toast.success("Register successful!", {
+          autoClose: 1500,
+        });
       })
       .catch((error) => {
-        console.log(error);
+        const errorMessage = error.message;
+        alert(errorMessage);
+        // ..
       });
-    toast.success("Register successful!", {
-      autoClose: 1500,
-    });
   };
   return (
     <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">
@@ -67,7 +82,7 @@ const Register = () => {
               required
             />
 
-            {/* {nameError && <p className="text-xs text-error">{}</p>} */}
+            {nameError && <p className="text-xs text-error">{}</p>}
 
             {/* Photo URL  */}
             <label className="label">Photo URL</label>
