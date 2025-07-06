@@ -2,9 +2,23 @@ import { Link, NavLink } from "react-router";
 import Logo from "../assets/open-book.png";
 import { use } from "react";
 import { AuthContext } from "../context/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { user } = use(AuthContext);
+  const { user, logOut } = use(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logout successful!", {
+          autoClose: 1500,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <section className="flex max-w-10/12 mx-auto py-2.5">
       {/* Dropmenu Responsive */}
@@ -162,7 +176,9 @@ const Navbar = () => {
         )}
 
         {user ? (
-          <Link className="navbar-btn">LogOut</Link>
+          <Link onClick={handleLogout} className="navbar-btn">
+            LogOut
+          </Link>
         ) : (
           <>
             {" "}

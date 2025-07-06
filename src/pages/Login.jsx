@@ -1,16 +1,39 @@
-import React, { useContext } from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { signInWithEmail } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [Error, setError] = useState("");
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log({ email, password });
+    signInWithEmail(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(`${location.state ? location.state : "/"}`);
+        toast.success("Login successful!", {
+          autoClose: 1500,
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        setError(errorCode);
+      });
+  };
   return (
     <section className="flex justify-center min-h-[calc(100vh-91px)] items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5 border-2 border-zinc-300">
         <h2 className="font-bold text-[26px] text-center text-[#2f2f2f] mt-4">
           Login your account
         </h2>
-        <form className="card-body">
+        <form onSubmit={handleLogin} className="card-body">
           <fieldset className="fieldset font-semibold text-[14px]">
             <button
               aria-label="Login with Google"
