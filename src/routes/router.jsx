@@ -11,6 +11,7 @@ import Register from "../pages/Register";
 import AuthLayout from "../layouts/AuthLayout";
 import PrivateRoute from "../context/PrivateRoute";
 import ErrorLayout from "../layouts/ErrorLayout";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: () => axios(`${import.meta.env.VITE_API_URL}/all-books`),
         element: (
           <Suspense fallback={<Loading></Loading>}>
             <Home></Home>

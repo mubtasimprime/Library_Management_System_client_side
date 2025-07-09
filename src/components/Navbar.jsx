@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <section className="flex max-w-10/12 mx-auto py-2.5">
+    <section className="flex max-w-9/12 mx-auto py-2.5">
       {/* Dropmenu Responsive */}
       <div className="navbar-start">
         <div className="dropdown">

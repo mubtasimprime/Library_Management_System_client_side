@@ -1,8 +1,13 @@
 import StarRatings from "react-star-ratings";
-import { useState } from "react";
+import { use, useState } from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext/AuthContext";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 const AddBooks = () => {
+  const navigate = useNavigate();
+  const { user } = use(AuthContext);
   const [rating, setRating] = useState(0);
   const handleFormData = (e) => {
     e.preventDefault();
@@ -12,24 +17,39 @@ const AddBooks = () => {
     bookData.rating = rating;
     console.log(bookData);
 
-    fetch("http://localhost:3000/add-books", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/add-books`, bookData)
+      .then((res) => {
+        // console.log(res.data.insertedId);
+        if (res.data.insertedId) {
           toast.success("New Book Added!", {
             autoClose: 1500,
           });
-          console.log(data);
+          console.log(res.data);
         }
         setRating(0);
         form.reset();
+        navigate("/");
       });
+
+    // fetch(`${import.meta.env.VITE_API_URL}/add-books`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(bookData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.insertedId) {
+    //       toast.success("New Book Added!", {
+    //         autoClose: 1500,
+    //       });
+    //       console.log(data);
+    //     }
+    //     setRating(0);
+    //     form.reset();
+    //   });
   };
   return (
     <section className="bg-blue-50 py-10">
@@ -147,22 +167,26 @@ const AddBooks = () => {
             </fieldset>
 
             <fieldset className="fieldset bg-white border-base-300 rounded-box border p-4 flex items-center gap-0 h-12">
-              <label className="label text-black font-bold">Email : </label>
+              <label className="label text-black font-bold text-[15px]">
+                Email :{" "}
+              </label>
               <input
                 name="email"
                 type="text"
                 className="input w-full font-semibold text-base cursor-not-allowed focus:outline-none border-none bg-white"
-                // value={email || ""}
+                value={user?.email || ""}
                 readOnly
               />
             </fieldset>
             <fieldset className="fieldset bg-white border-base-300 rounded-box border p-4 flex items-center gap-0 h-12">
-              <label className="label text-black font-bold">Name : </label>
+              <label className="label text-black font-bold text-[15px]">
+                Name :{" "}
+              </label>
               <input
                 name="name"
                 type="text"
                 className="input w-full font-semibold text-base cursor-not-allowed focus:outline-none border-none bg-white"
-                // value={user?.displayName || ""}
+                value={user?.displayName || ""}
                 readOnly
               />
             </fieldset>
