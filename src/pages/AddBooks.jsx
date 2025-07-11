@@ -30,6 +30,9 @@ const AddBooks = () => {
         setRating(0);
         form.reset();
         navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
       });
 
     // fetch(`${import.meta.env.VITE_API_URL}/add-books`, {

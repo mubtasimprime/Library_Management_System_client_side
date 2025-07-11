@@ -7,7 +7,7 @@ const MainLayout = () => {
   return (
     <>
       <section className="font">
-        <div className="shadow-md">
+        <div className="shadow-md bg-white sticky top-0 z-50">
           <Navbar></Navbar>
         </div>
         <Outlet></Outlet>
