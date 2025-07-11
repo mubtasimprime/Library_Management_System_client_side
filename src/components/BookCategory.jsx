@@ -114,10 +114,10 @@ const BookCategory = () => {
                 <img
                   src={cat.image}
                   alt={cat.category_name}
-                  className="w-full h-[330px] object-cover"
+                  className="w-full h-[330px] object-cover rounded-sm"
                 />
               </div>
-              <h3 className="text-xl font-semibold mt-4 text-center">
+              <h3 className="text-xl text-gray-800 font-semibold mt-4 text-center">
                 {cat.category_name}
               </h3>
             </Link>

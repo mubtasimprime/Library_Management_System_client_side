@@ -21,7 +21,6 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => axios(`${import.meta.env.VITE_API_URL}/all-books`),
         element: (
           <Suspense fallback={<Loading></Loading>}>
             <Home></Home>
@@ -30,9 +29,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-books",
+        loader: () => axios(`${import.meta.env.VITE_API_URL}/all-books`),
         element: (
           <PrivateRoute>
-            <AllBooks></AllBooks>
+            <Suspense fallback={<Loading></Loading>}>
+              <AllBooks></AllBooks>
+            </Suspense>
           </PrivateRoute>
         ),
       },

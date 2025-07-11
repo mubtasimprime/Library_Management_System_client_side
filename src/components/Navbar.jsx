@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
-
   const handleLogout = () => {
     logOut()
       .then(() => {
