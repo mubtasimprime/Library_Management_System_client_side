@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "react-router";
+import StarRatings from "react-star-ratings";
 
 const AllBooksCard = ({ book }) => {
   const { name, image, author, category, quantity, rating } = book;
@@ -18,16 +18,22 @@ const AllBooksCard = ({ book }) => {
         <p className="text-gray-600 italic">{author}</p>
 
         <span className="text-sm bg-blue-100 text-blue-800 px-5 py-1 rounded-full">
-          Category: {category}
+          {category}
         </span>
-        <div className="flex justify-between items-center pt-2">
-          <span className="text-sm bg-blue-100 text-blue-800 px-4 py-1 rounded-full">
-            Rating: {rating}.0
-          </span>
-          <span className="text-sm bg-blue-100 text-blue-800 px-4 py-1 rounded-full">
-            Qty: {quantity}
-          </span>
+
+        <div className="flex items-center justify-center mt-2">
+          <StarRatings
+            rating={rating}
+            starRatedColor="#f59e0b" // amber-500
+            starEmptyColor="#d1d5db" // gray-300
+            starDimension="20px"
+            starSpacing="2px"
+            numberOfStars={5}
+            name="rating"
+          />
+          <span className="ml-1 text-sm text-gray-600">({rating})</span>
         </div>
+        <div className="text-gray-700 text-sm">Quantity: {quantity}</div>
       </div>
 
       <Link
