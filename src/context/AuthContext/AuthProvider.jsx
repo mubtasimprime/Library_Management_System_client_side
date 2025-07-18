@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -60,6 +61,12 @@ const AuthProvider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      // console.log(currentUser);
+      axios.get(`${import.meta.env.VITE_API_URL}`, {
+        headers: {
+          Authorization: `Bearer ${currentUser.accessToken}`,
+        },
+      });
     });
     return () => {
       unsubcribe();

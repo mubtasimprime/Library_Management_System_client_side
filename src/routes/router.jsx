@@ -12,6 +12,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import PrivateRoute from "../context/PrivateRoute";
 import ErrorLayout from "../layouts/ErrorLayout";
 import axios from "axios";
+import CategoryBookPage from "../pages/CategoryBookPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,18 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <Suspense fallback={<Loading></Loading>}>
               <AllBooks></AllBooks>
+            </Suspense>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/books/:category",
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/books/${params.category}`),
+        element: (
+          <PrivateRoute>
+            <Suspense fallback={<Loading></Loading>}>
+              <CategoryBookPage></CategoryBookPage>
             </Suspense>
           </PrivateRoute>
         ),

@@ -9,28 +9,32 @@ const BookCategory = () => {
       id: 1,
       image: "https://i.ibb.co/359TXTbz/drama.jpg",
       category_name: "Drama",
+      categories: "drama",
     },
     {
       id: 2,
       image: "https://i.ibb.co/KjXBNs0f/history.jpg",
       category_name: "History",
+      categories: "history",
     },
     {
       id: 3,
       image: "https://i.ibb.co/ymCpXQSs/novel.jpg",
       category_name: "Novel",
+      categories: "novel",
     },
     {
       id: 4,
       image: "https://i.ibb.co/4Dgbtwc/thriller.jpg",
       category_name: "Thriller",
+      categories: "thriller",
     },
   ];
 
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.2, // Trigger when 20% of element is visible
-    triggerOnce: false, // This is the key change - now it will trigger every time
+    triggerOnce: false, //it will trigger every time
   });
 
   useEffect(() => {
@@ -109,7 +113,10 @@ const BookCategory = () => {
             variants={item}
             whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
           >
-            <Link className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col">
+            <Link
+              to={`/books/${cat.categories.toLowerCase()}`}
+              className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col"
+            >
               <div className="rounded-sm">
                 <img
                   src={cat.image}
