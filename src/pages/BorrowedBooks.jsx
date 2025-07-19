@@ -1,40 +1,42 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
-import StarRatings from "react-star-ratings";
+import Swal from "sweetalert2";
 
 const BorrowedBooks = () => {
   const { user } = useContext(AuthContext);
   const [borrowed, setBorrowed] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const handleReturn = async (id) => {
-    try {
-      const confirm = window.confirm(
-        "Are you sure you want to return this book?"
-      );
-      if (!confirm) return;
+  const handleReturn = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to return this book?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, return it!",
+    }).then((result) => {
+      if (!result.isConfirmed) return;
 
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/return-book/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      const result = await response.json();
-
-      if (result.success) {
-        toast.success("Book returned successfully!");
-        setBorrowed((prev) => prev.filter((b) => b._id !== id)); // Remove from UI
-      } else {
-        throw new Error(result.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
+      fetch(`${import.meta.env.VITE_API_URL}/return-book/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            toast.success("Book returned successfully!");
+            setBorrowed((prev) => prev.filter((b) => b._id !== id));
+          } else {
+            toast.error(data.message || "Failed to return the book.");
+          }
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    });
   };
-
   useEffect(() => {
     const fetchBorrowedBooks = async () => {
       if (!user?.email) return;
