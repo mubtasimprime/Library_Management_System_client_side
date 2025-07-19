@@ -37,7 +37,7 @@ const AllBooksCard = ({ book }) => {
       </div>
 
       <Link
-        to={`/update-book/${book._id}`}
+        to={`/update-book-data/${book._id}`}
         className="block w-full bg-blue-600 text-white text-center font-semibold py-2 hover:bg-blue-800 transition duration-300"
       >
         Update

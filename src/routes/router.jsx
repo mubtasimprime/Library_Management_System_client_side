@@ -13,6 +13,7 @@ import PrivateRoute from "../context/PrivateRoute";
 import ErrorLayout from "../layouts/ErrorLayout";
 import axios from "axios";
 import CategoryBookPage from "../pages/CategoryBookPage";
+import UpdateBookData from "../components/UpdateBookData";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,19 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AddBooks></AddBooks>
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-book-data/:id",
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/book/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>,
+        element: (
+          <Suspense fallback={<Loading></Loading>}>
+            <PrivateRoute>
+              <UpdateBookData></UpdateBookData>
+            </PrivateRoute>
+          </Suspense>
         ),
       },
       {
