@@ -1,13 +1,17 @@
 import BookCategory from "../components/BookCategory";
 import GuaranteesSection from "../components/GuranteesSection";
+import Faq from "../components/Faq";
 import Hero from "../components/Hero";
 
 const Home = () => {
   return (
     <>
-      <Hero></Hero>
-      <BookCategory></BookCategory>
-      <GuaranteesSection></GuaranteesSection>
+      <div className="bg-gray-50">
+        <Hero></Hero>
+        <BookCategory></BookCategory>
+        <GuaranteesSection></GuaranteesSection>
+        <Faq></Faq>
+      </div>
     </>
   );
 };
