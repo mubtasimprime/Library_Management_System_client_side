@@ -10,6 +10,7 @@ const BookDetails = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [returnDate, setReturnDate] = useState("");
+
   const handleBorrow = () => {
     if (!returnDate) {
       toast.error("Please select a return date");
@@ -20,6 +21,7 @@ const BookDetails = () => {
       bookId: book._id,
       userName: user.displayName,
       userEmail: user.email,
+      category: book.category,
       returnDate,
     };
 
