@@ -1,12 +1,60 @@
-# React + Vite
+# Library Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for managing library operations with an intuitive user interface.
 
-Currently, two official plugins are available:
+## Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application is designed to streamline library operations by providing features for adding books, tracking borrows/returns, and managing book details digitally. It serves as a digital solution for small to medium-sized libraries to replace traditional paper-based systems.
 
-## Expanding the ESLint configuration
+## Live URL
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+https://library-management-6a442.web.app
+
+## Key Features
+
+- **Book Management**:
+  - Add new books to the library collection
+  - Update existing book details (title, author, availability, etc.)
+  - View all books in an organized layout
+- **Borrowing System**:
+  - Track which books are borrowed and by whom
+  - Manage return dates and overdue books
+- **User Experience**:
+  - Star rating system for books
+  - Responsive design for all device sizes
+  - Interactive notifications and alerts
+  - Clean, modern UI with easy navigation
+
+## Technologies Used
+
+- React.js (with Vite as build tool)
+- React Router for navigation
+- Tailwind CSS with DaisyUI components
+- Firebase for hosting and backend services
+
+## NPM Packages Used
+
+- `react-router-dom` - For client-side routing
+- `daisyui` - For UI components
+- `tailwindcss` - For utility-first CSS
+- `react-rating-stars-component` - For star rating functionality
+- `react-toastify` - For notification toasts
+- `sweetalert2` - For beautiful alert dialogs
+- `firebase` - For backend services and hosting
+
+## Installation
+
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to start the development server
+
+## Deployment
+
+The application is automatically deployed to Firebase Hosting when changes are pushed to the main branch.
+
+## Future Enhancements
+
+- User authentication system
+- Advanced search and filtering
+- Reports and analytics
+- Multi-library support
