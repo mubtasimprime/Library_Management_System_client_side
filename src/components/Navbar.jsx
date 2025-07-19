@@ -1,12 +1,13 @@
 import { Link, NavLink } from "react-router";
 import Logo from "../assets/open-book.png";
-import { use } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const { user, logOut } = use(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -14,57 +15,23 @@ const Navbar = () => {
           autoClose: 1500,
         });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
 
-  // Animation variants
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  const hoverEffect = {
-    scale: 1.05,
-    transition: { duration: 0.2 },
-  };
-
-  const tapEffect = {
-    scale: 0.95,
-  };
+  const hoverEffect = { scale: 1.05, transition: { duration: 0.2 } };
+  const tapEffect = { scale: 0.95 };
 
   return (
     <motion.section
-      initial="hidden"
-      animate="visible"
-      variants={container}
-      className="flex max-w-9/12 mx-auto py-2.5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex max-w-9/12 mx-auto py-2.5 justify-between items-center"
     >
-      {/* Logo and Dropdown */}
-      <motion.div variants={item} className="navbar-start">
-        <div className="dropdown">
-          <motion.div
-            whileHover={hoverEffect}
-            whileTap={tapEffect}
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost lg:hidden"
-          >
+      {/* Logo & Mobile Dropdown */}
+      <div className="navbar-start flex items-center gap-3">
+        {/* Mobile Dropdown */}
+        <div className="dropdown lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -75,131 +42,156 @@ const Navbar = () => {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
+                strokeWidth={2}
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
-          </motion.div>
-          <motion.ul
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
           >
-            {["/", "/all-books", "/add-books", "/borrowed-books"].map(
-              (path) => (
-                <motion.li key={path} whileHover={{ x: 5 }}>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "inline-block text-blue-600 scale-105 transform transition-transform"
-                        : "inline-block hover:scale-105 hover:text-blue-600 duration-300"
-                    }
-                    to={path}
-                  >
-                    {path === "/"
-                      ? "Home"
-                      : path === "/all-books"
-                      ? "All Books"
-                      : path === "/add-books"
-                      ? "Add Books"
-                      : "Borrowed Books"}
-                  </NavLink>
-                </motion.li>
-              )
-            )}
-          </motion.ul>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "text-blue-600 font-semibold" : ""
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/all-books"
+                className={({ isActive }) =>
+                  isActive ? "text-blue-600 font-semibold" : ""
+                }
+              >
+                All Books
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/add-books"
+                className={({ isActive }) =>
+                  isActive ? "text-blue-600 font-semibold" : ""
+                }
+              >
+                Add Books
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/borrowed-books"
+                className={({ isActive }) =>
+                  isActive ? "text-blue-600 font-semibold" : ""
+                }
+              >
+                Borrowed Books
+              </NavLink>
+            </li>
+          </ul>
         </div>
         <motion.div whileHover={{ scale: 1.05 }}>
-          <Link to="/" className="flex items-center justify-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <motion.img
               src={Logo}
-              alt=""
+              alt="Bookify Logo"
               className="h-10 w-10"
               whileHover={{ rotate: 10 }}
             />
             <p className="text-2xl font-bold">Bookify</p>
           </Link>
         </motion.div>
-      </motion.div>
+      </div>
 
-      {/* Desktop Navigation */}
-      <motion.div variants={item} className="navbar-center hidden lg:flex">
-        <motion.ul
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="flex gap-8 cursor-pointer text-base font-medium"
-        >
-          {["/", "/all-books", "/add-books", "/borrowed-books"].map((path) => (
-            <motion.li
-              key={path}
-              variants={item}
-              whileHover={hoverEffect}
-              whileTap={tapEffect}
+      {/* Desktop Menu */}
+      <div className="hidden lg:flex navbar-center">
+        <ul className="flex gap-8 text-base font-medium">
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+              }
             >
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "inline-block text-blue-600 scale-105 transform transition-transform"
-                    : "inline-block hover:scale-105 hover:text-blue-600 duration-300"
-                }
-                to={path}
-              >
-                {path === "/"
-                  ? "Home"
-                  : path === "/all-books"
-                  ? "All Books"
-                  : path === "/add-books"
-                  ? "Add Books"
-                  : "Borrowed Books"}
-              </NavLink>
-            </motion.li>
-          ))}
-        </motion.ul>
-      </motion.div>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/all-books"
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+              }
+            >
+              All Books
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/add-books"
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+              }
+            >
+              Add Books
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/borrowed-books"
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+              }
+            >
+              Borrowed Books
+            </NavLink>
+          </li>
+        </ul>
+      </div>
 
-      {/* User Avatar and Auth Buttons */}
-      <motion.div variants={item} className="navbar-end gap-4">
-        {user ? (
-          <motion.div
+      {/* Right Side Buttons */}
+      <div className="navbar-end gap-4 flex items-center">
+        {user && (
+          <div
             className="avatar tooltip tooltip-bottom"
             data-tip={user?.displayName || "Guest"}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
-            <div className="ring-primary ring-offset-base-100 w-7 rounded-full ring-2 ring-offset-2">
+            <div className="w-7 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
               <img
                 src={
                   user?.photoURL ||
                   "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
                 }
-                alt="User avatar"
+                alt="User Avatar"
               />
             </div>
-          </motion.div>
-        ) : null}
+          </div>
+        )}
 
         {user ? (
           <motion.div whileHover={hoverEffect} whileTap={tapEffect}>
-            <Link onClick={handleLogout} className="navbar-btn">
-              LogOut
-            </Link>
+            <button onClick={handleLogout} className="navbar-btn">
+              Logout
+            </button>
           </motion.div>
         ) : (
           <>
             <motion.div whileHover={hoverEffect} whileTap={tapEffect}>
               <Link to="/auth/login" className="navbar-btn">
-                LogIn
+                Login
               </Link>
             </motion.div>
             <motion.div whileHover={hoverEffect} whileTap={tapEffect}>
               <Link to="/auth/register" className="navbar-btn">
-                SignIn
+                SignUp
               </Link>
             </motion.div>
           </>
         )}
-      </motion.div>
+      </div>
     </motion.section>
   );
 };
