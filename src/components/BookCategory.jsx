@@ -114,7 +114,7 @@ const BookCategory = () => {
             whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
           >
             <Link
-              to={`/books/${cat.categories.toLowerCase()}`}
+              to={`/books/${cat.categories}`}
               className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col"
             >
               <div className="rounded-sm">

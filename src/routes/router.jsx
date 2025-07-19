@@ -42,7 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/books/:category",
         loader: ({ params }) =>
-          axios(`${import.meta.env.VITE_API_URL}/books/${params.category}`),
+          axios(
+            `${import.meta.env.VITE_API_URL}/books/${params.category}`
+          ).then((res) => res.data),
+
         element: (
           <PrivateRoute>
             <Suspense fallback={<Loading></Loading>}>

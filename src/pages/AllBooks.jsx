@@ -9,7 +9,7 @@ const AllBooks = () => {
     <article className="bg-blue-50">
       <section className="py-10">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-1 md:mb-2 lg:mb-2">All Books</h1>
+          <h1 className="text-4xl font-bold mb-1 md:mb-2 lg:mb-2">ALL BOOKS</h1>
           <p className="mb-8 max-w-5xl mx-auto">
             Explore our curated collection of books, featuring gripping
             thrillers, insightful historical works, and powerful dramatic

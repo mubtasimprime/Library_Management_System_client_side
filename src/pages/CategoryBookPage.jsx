@@ -1,5 +1,5 @@
 import { useLoaderData, useParams } from "react-router";
-import AllBooksCard from "../components/AllBooksCard";
+import BookCategoryCard from "../components/BookCategoryCard";
 
 const CategoryBookPage = () => {
   const books = useLoaderData();
@@ -10,7 +10,7 @@ const CategoryBookPage = () => {
       <section className="py-10">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-1 md:mb-2 lg:mb-2">
-            {category} Books
+            {category.toUpperCase()} BOOKS
           </h1>
           <p className="mb-8 max-w-5xl mx-auto">
             Explore our curated collection of books, featuring gripping
@@ -20,7 +20,7 @@ const CategoryBookPage = () => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7/12 mx-auto ">
             {books.map((book) => (
-              <AllBooksCard key={book._id} book={book} />
+              <BookCategoryCard key={book._id} book={book} />
             ))}
           </div>
         </div>
