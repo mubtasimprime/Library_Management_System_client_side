@@ -7,6 +7,9 @@ import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   const handleLogout = () => {
     logOut()
@@ -63,6 +66,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
+                onClick={scrollToTop}
                 to="/all-books"
                 className={({ isActive }) =>
                   isActive ? "text-blue-600 font-semibold" : ""
@@ -73,6 +77,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
+                onClick={scrollToTop}
                 to="/add-books"
                 className={({ isActive }) =>
                   isActive ? "text-blue-600 font-semibold" : ""
@@ -83,6 +88,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
+                onClick={scrollToTop}
                 to="/borrowed-books"
                 className={({ isActive }) =>
                   isActive ? "text-blue-600 font-semibold" : ""
@@ -111,6 +117,7 @@ const Navbar = () => {
         <ul className="flex gap-8 text-base font-medium">
           <li>
             <NavLink
+              onClick={scrollToTop}
               to="/"
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
@@ -121,6 +128,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
+              onClick={scrollToTop}
               to="/all-books"
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
@@ -131,6 +139,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
+              onClick={scrollToTop}
               to="/add-books"
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
@@ -141,6 +150,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
+              onClick={scrollToTop}
               to="/borrowed-books"
               className={({ isActive }) =>
                 isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
