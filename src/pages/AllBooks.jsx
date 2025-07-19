@@ -6,7 +6,7 @@ import { useState } from "react";
 const AllBooks = () => {
   const data = useLoaderData();
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
-  const [viewMode, setViewMode] = useState("card"); // 'card' or 'table'
+  const [viewMode, setViewMode] = useState("card");
 
   const handleToggleAvailable = () => setShowAvailableOnly(!showAvailableOnly);
   const handleViewChange = (mode) => setViewMode(mode);
@@ -56,7 +56,6 @@ const AllBooks = () => {
             </div>
           </div>
 
-          {/* Conditional Rendering */}
           {viewMode === "card" ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-8/12 mx-auto">
               {filteredBooks.map((book) => (

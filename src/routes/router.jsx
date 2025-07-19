@@ -33,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/all-books",
         loader: () => axios(`${import.meta.env.VITE_API_URL}/all-books`),
+        hydrateFallbackElement: <Loading></Loading>,
         element: (
           <PrivateRoute>
             <Suspense fallback={<Loading></Loading>}>
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
           axios(
             `${import.meta.env.VITE_API_URL}/books/${params.category}`
           ).then((res) => res.data),
-
+        hydrateFallbackElement: <Loading></Loading>,
         element: (
           <PrivateRoute>
             <Suspense fallback={<Loading></Loading>}>
@@ -60,10 +61,13 @@ const router = createBrowserRouter([
         path: "/book-details/:id",
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/book/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>,
         element: (
-          <PrivateRoute>
-            <BookDetails />
-          </PrivateRoute>
+          <Suspense fallback={<Loading></Loading>}>
+            <PrivateRoute>
+              <BookDetails />
+            </PrivateRoute>
+          </Suspense>
         ),
       },
       {
