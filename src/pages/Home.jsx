@@ -1,4 +1,5 @@
 import BookCategory from "../components/BookCategory";
+import GuaranteesSection from "../components/GuranteesSection";
 import Hero from "../components/Hero";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <>
       <Hero></Hero>
       <BookCategory></BookCategory>
+      <GuaranteesSection></GuaranteesSection>
     </>
   );
 };

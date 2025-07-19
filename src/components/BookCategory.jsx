@@ -1,7 +1,5 @@
 import { Link } from "react-router";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 const BookCategory = () => {
   const categories = [
@@ -31,88 +29,35 @@ const BookCategory = () => {
     },
   ];
 
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
-    threshold: 0.2, // Trigger when 20% of element is visible
-    triggerOnce: false, //it will trigger every time
-  });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [controls, inView]);
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
-    },
-  };
-
   return (
-    <section ref={ref} className="max-w-9/12 mx-auto py-10">
+    <section className="max-w-9/12 mx-auto py-10">
       <motion.h1
-        initial="hidden"
-        animate={controls}
-        variants={{
-          hidden: { opacity: 0, y: -30 },
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.5 },
-          },
-        }}
+        initial={{ x: -10, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 60, damping: 12 }}
         className="text-4xl font-bold mb-1 md:mb-2 lg:mb-2"
       >
         Featured <span className="text-blue-600">Categories</span>
       </motion.h1>
 
       <motion.p
-        initial="hidden"
-        animate={controls}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: { delay: 0.2, duration: 0.5 },
-          },
-        }}
-        className="mb-8"
+        initial={{ x: 10, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 60, damping: 12 }}
+        className="mb-8 text-gray-600"
       >
         Embark book on futuristic journeys. Novel, Thriller, History and Drama
         wonders await in these mind-bending sagas.
       </motion.p>
 
       <motion.div
-        initial="hidden"
-        animate={controls}
-        variants={container}
+        initial={{ y: -20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 60, damping: 12 }}
         className="max-w-10/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8"
       >
         {categories.map((cat) => (
-          <motion.div
-            key={cat.id}
-            variants={item}
-            whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-          >
+          <motion.div key={cat.id}>
             <Link
               to={`/books/${cat.categories}`}
               className="bg-blue-100 p-4 rounded-lg shadow-md flex flex-col"
