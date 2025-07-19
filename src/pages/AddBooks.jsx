@@ -60,8 +60,10 @@ const AddBooks = () => {
     <section className="bg-blue-50 py-10">
       <div className="max-w-9/12 mx-auto">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-1 md:mb-2 lg:mb-2">Add Books</h1>
-          <p className="mb-8">
+          <h1 className="text-2xl md:text-4xl font-bold mb-1 md:mb-2 lg:mb-2">
+            ADD BOOKS
+          </h1>
+          <p className="mb-8 text-sm md:text-base">
             Add new books by entering the title, author, category, and details.
             Keep your library updated and well-organized effortlessly.
           </p>

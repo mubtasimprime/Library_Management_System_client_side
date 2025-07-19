@@ -63,9 +63,15 @@ const BorrowedBooks = () => {
   }, [user]);
 
   return (
-    <section className="py-20 bg-blue-50">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">My Borrowed Books</h1>
+    <section className="py-5 md:py-20 bg-blue-50">
+      <div className="max-w-6xl mx-auto px-8 md:px-4 lg:px-0">
+        <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-6 text-center">
+          My Borrowed Books
+        </h1>
+        <p className="text-sm md:text-base mb-8">
+          Welcome to your Borrowed Books section. Here, you can view all the
+          books you've currently borrowed from our library.
+        </p>
 
         {borrowed.length === 0 ? (
           <p className="text-gray-600">You haven't borrowed any books yet.</p>

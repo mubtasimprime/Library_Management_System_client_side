@@ -35,7 +35,7 @@ const BookCategory = () => {
         initial={{ x: -10, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 60, damping: 12 }}
-        className="text-4xl font-bold mb-1 md:mb-2 lg:mb-2"
+        className="text-2xl md:text-4xl font-bold mb-1 md:mb-2 lg:mb-2"
       >
         Featured <span className="text-blue-600">Categories</span>
       </motion.h1>

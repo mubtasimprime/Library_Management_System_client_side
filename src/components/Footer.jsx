@@ -15,7 +15,7 @@ const Footer = () => {
       </div>
       <nav className="flex flex-col justify-center items-center gap-3">
         <div className="navbar-center flex mb-5">
-          <ul className="flex gap-8 cursor-pointer text-base font-medium">
+          <ul className="flex gap-8 cursor-pointer text-sm md:text-base font-medium">
             <li>
               <NavLink
                 className={({ isActive }) =>
@@ -97,7 +97,9 @@ const Footer = () => {
             <FaLinkedin size={20} />
           </Link>
         </div>
-        <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+        <p className="text-xs md:text-base">
+          Copyright © {new Date().getFullYear()} - All right reserved
+        </p>
       </nav>
     </footer>
   );
