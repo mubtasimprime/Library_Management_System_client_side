@@ -15,7 +15,9 @@ const AddBooks = () => {
     const formData = new FormData(form);
     const bookData = Object.fromEntries(formData.entries());
     bookData.rating = rating;
-    console.log(bookData);
+    // console.log(bookData);
+    bookData.userName = user?.displayName;
+    bookData.userEmail = user?.email;
 
     axios
       .post(`${import.meta.env.VITE_API_URL}/add-books`, bookData)
@@ -167,31 +169,6 @@ const AddBooks = () => {
                   starSpacing="4px"
                 />
               </div>
-            </fieldset>
-
-            <fieldset className="fieldset bg-white border-base-300 rounded-box border p-4 flex items-center gap-0 h-12">
-              <label className="label text-black font-bold text-[15px]">
-                Email :{" "}
-              </label>
-              <input
-                name="email"
-                type="text"
-                className="input w-full font-semibold text-base cursor-not-allowed focus:outline-none border-none bg-white"
-                value={user?.email || ""}
-                readOnly
-              />
-            </fieldset>
-            <fieldset className="fieldset bg-white border-base-300 rounded-box border p-4 flex items-center gap-0 h-12">
-              <label className="label text-black font-bold text-[15px]">
-                Name :{" "}
-              </label>
-              <input
-                name="name"
-                type="text"
-                className="input w-full font-semibold text-base cursor-not-allowed focus:outline-none border-none bg-white"
-                value={user?.displayName || ""}
-                readOnly
-              />
             </fieldset>
           </div>
           <input

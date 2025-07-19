@@ -33,7 +33,9 @@ const AllBooksCard = ({ book }) => {
           />
           <span className="ml-1 text-sm text-gray-600">({rating})</span>
         </div>
-        <div className="text-gray-700 text-sm">Quantity: {quantity}</div>
+        <div className="text-gray-700 text-sm">
+          Quantity: <span className="font-bold">{quantity}</span>
+        </div>
       </div>
 
       <Link

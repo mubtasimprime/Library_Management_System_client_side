@@ -14,6 +14,7 @@ import ErrorLayout from "../layouts/ErrorLayout";
 import axios from "axios";
 import CategoryBookPage from "../pages/CategoryBookPage";
 import UpdateBookData from "../components/UpdateBookData";
+import BookDetails from "../components/BookDetails";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,16 @@ const router = createBrowserRouter([
             <Suspense fallback={<Loading></Loading>}>
               <CategoryBookPage></CategoryBookPage>
             </Suspense>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/book-details/:id",
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/book/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <BookDetails />
           </PrivateRoute>
         ),
       },

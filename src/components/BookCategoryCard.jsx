@@ -33,11 +33,13 @@ const BookCategoryCard = ({ book }) => {
           />
           <span className="ml-1 text-sm text-gray-600">({rating})</span>
         </div>
-        <div className="text-gray-700 text-sm">Quantity: {quantity}</div>
+        <div className="text-gray-700 text-sm">
+          Quantity: <span className="font-bold">{quantity}</span>
+        </div>
       </div>
 
       <Link
-        to={`/update-book/${book._id}`}
+        to={`/book-details/${book._id}`}
         className="block w-full bg-blue-600 text-white text-center font-semibold py-2 hover:bg-blue-800 transition duration-300"
       >
         Details

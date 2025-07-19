@@ -40,8 +40,8 @@ const UpdateBookData = () => {
   };
 
   return (
-    <section className="bg-blue-50 py-10">
-      <div className="max-w-9/12 mx-auto">
+    <section className="bg-blue-50 py-20">
+      <div className="max-w-8/12 mx-auto">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-1 md:mb-2 lg:mb-2">
             UPDATE BOOKS
