@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 const BookCategory = () => {
   const categories = [
@@ -69,8 +70,9 @@ const BookCategory = () => {
                   className="w-full h-[330px] object-cover rounded-sm"
                 />
               </div>
-              <h3 className="text-xl text-gray-800 font-semibold mt-4 text-center">
-                {cat.category_name}
+              <h3 className="text-xl text-gray-800 font-semibold mt-4 text-center flex items-center justify-center gap-2">
+                {cat.category_name}{" "}
+                <FaArrowRight className="animate-bounce-x" size={16} />
               </h3>
             </Link>
           </motion.div>

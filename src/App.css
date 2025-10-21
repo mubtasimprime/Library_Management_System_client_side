@@ -9,3 +9,17 @@
 .font {
   font-family: "Montserrat", sans-serif;
 }
+
+@keyframes bounce-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1.5s infinite;
+}

@@ -116,7 +116,7 @@ const UpdateBookData = () => {
               <label className="tex-black font-bold">Rating</label>
               <div className="border border-gray-300 rounded-md p-2 inline-block">
                 <StarRatings
-                  rating={rating}
+                  rating={ratings}
                   starRatedColor="#2563eb" // blue-600
                   starHoverColor="#60a5fa" // blue-400
                   changeRating={(newRating) => setRating(newRating)}
