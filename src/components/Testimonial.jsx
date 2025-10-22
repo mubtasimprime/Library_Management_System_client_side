@@ -18,7 +18,7 @@ const Testimonial = () => {
       readerEmail: "sajid@gmail.com",
       rating: 5,
       description:
-        "I enjoy the in-depth coverage of current events. Your articles keep me well-informed every day.",
+        "The library system is very user-friendly. I can easily search and borrow books without any hassle.",
     },
     {
       _id: 2,
@@ -27,7 +27,7 @@ const Testimonial = () => {
       readerEmail: "sumon@gmail.com",
       rating: 4,
       description:
-        "The editorial pieces are insightful and balanced. I particularly appreciate the local news coverage.",
+        "I appreciate the detailed catalog and easy tracking of borrowed books. The notification system is also helpful.",
     },
     {
       _id: 3,
@@ -36,7 +36,7 @@ const Testimonial = () => {
       readerEmail: "mashiur@gmail.com",
       rating: 5,
       description:
-        "I love the investigative journalism section. It provides clarity on complex issues in a simple way.",
+        "The borrowing process is smooth and the system keeps me updated on return dates. Highly efficient!",
     },
     {
       _id: 4,
@@ -46,7 +46,7 @@ const Testimonial = () => {
       readerEmail: "fuad@gmail.com",
       rating: 3,
       description:
-        "Good coverage overall, but I wish there were more opinion pieces on international topics.",
+        "Overall a good system, but I wish there were more features for tracking reading history and recommendations.",
     },
     {
       _id: 5,
@@ -55,7 +55,7 @@ const Testimonial = () => {
       readerEmail: "anisur@gmail.com",
       rating: 5,
       description:
-        "Absolutely fantastic! The newspaper delivers news promptly and accurately every day.",
+        "Fantastic library management system! It makes borrowing, returning, and searching for books so simple and fast.",
     },
   ];
 
