@@ -161,10 +161,7 @@ const Navbar = () => {
           >
             <div className="w-7 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
               <img
-                src={
-                  user?.photoURL ||
-                  "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-                }
+                src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
                 alt="User Avatar"
               />
             </div>

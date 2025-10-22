@@ -2,13 +2,21 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { FaUpload } from "react-icons/fa";
+import axios from "axios";
+import { BiSolidImage } from "react-icons/bi";
 
 const Register = () => {
   const { signUpWithEmail, setUser, updateUser, signInWithGoogle } =
     useContext(AuthContext);
+
   const [nameError, setNameError] = useState("");
+  const [previewImage, setPreviewImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(null);
   const navigate = useNavigate();
 
+  // Google Sign In
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
@@ -17,34 +25,33 @@ const Register = () => {
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        console.log("ddddddd", error);
+        console.log("Google Sign-in error:", error);
       });
   };
 
+  //  Handle Register
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
+    const name = form.name.value.trim();
+    const email = form.email.value;
+    const password = form.password.value;
+
     if (name.length < 5) {
-      setNameError("Name should be more than 5 character");
+      setNameError("Name should be more than 5 characters");
       return;
     } else {
       setNameError("");
     }
-    const email = form.email.value;
-    const photo = form.photo.value;
-    const password = form.password.value;
 
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters long");
       return;
     }
-
     if (!/[A-Z]/.test(password)) {
       toast.error("Password must contain at least one uppercase letter");
       return;
     }
-
     if (!/[a-z]/.test(password)) {
       toast.error("Password must contain at least one lowercase letter");
       return;
@@ -53,27 +60,56 @@ const Register = () => {
     signUpWithEmail(email, password)
       .then((result) => {
         const user = result.user;
+
         updateUser({
           displayName: name,
-          photoURL: photo,
+          photoURL: avatarUrl || "https://i.ibb.co/4pDNDk1/avatar.png",
         })
           .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photo });
+            setUser({
+              ...user,
+              displayName: name,
+              photoURL: avatarUrl || "https://i.ibb.co/4pDNDk1/avatar.png",
+            });
+            toast.success("Register successful!", { autoClose: 1500 });
             navigate("/");
           })
           .catch((error) => {
             console.log(error);
             setUser(user);
           });
-        toast.success("Register successful!", {
-          autoClose: 1500,
-        });
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        alert(errorMessage);
-        // ..
+        console.log("Register Error:", error.message);
+        toast.error(error.message);
       });
+  };
+
+  //  Handle Image Upload to ImgBB
+  const handleImageUpload = async (e) => {
+    const image = e.target.files[0];
+    if (!image) return;
+
+    setPreviewImage(URL.createObjectURL(image));
+    setUploading(true);
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const imageUrl = `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_image_upload_key
+      }`;
+      const res = await axios.post(imageUrl, formData);
+      const hostedUrl = res.data.data.url;
+      setAvatarUrl(hostedUrl);
+      toast.success("Image uploaded successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Image upload failed");
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -82,8 +118,10 @@ const Register = () => {
         <h2 className="font-bold text-[26px] text-center text-[#2f2f2f] mt-4">
           Register your account
         </h2>
+
         <form onSubmit={handleRegister} className="card-body">
           <fieldset className="fieldset font-semibold text-[14px]">
+            {/* Google Sign In */}
             <button
               onClick={handleGoogleSignIn}
               aria-label="Login with Google"
@@ -101,29 +139,63 @@ const Register = () => {
             </button>
 
             <h1 className="text-center mt-2 font-bold text-[16px]">OR</h1>
-            {/* Name  */}
+
+            {/* Name */}
             <label className="label">Name</label>
             <input
               name="name"
-              type="name"
+              type="text"
               className="input font-semibold"
               placeholder="Name"
               required
             />
+            {nameError && <p className="text-xs text-error">{nameError}</p>}
 
-            {nameError && <p className="text-xs text-error">{}</p>}
+            {/* Image Upload */}
+            <div className="mt-2">
+              <label className="block text-sm font-sm text-3 mb-1">
+                Profile Picture
+              </label>
+              <div className="flex items-center gap-4">
+                {previewImage ? (
+                  <img
+                    src={previewImage}
+                    alt="Preview"
+                    className="w-16 h-16 rounded-full object-cover border border-black"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center">
+                    <span className="text-white">
+                      <BiSolidImage size={26} />
+                    </span>
+                  </div>
+                )}
+                <label className="flex-1">
+                  <div className="btn border border-[#b2d8d8] w-full flex items-center justify-center gap-2 font-medium bg-white">
+                    {uploading ? (
+                      <>
+                        <span className="loading loading-spinner text-primary"></span>
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <FaUpload />
+                        <span className="text-gray-500">Upload Image</span>
+                      </>
+                    )}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </div>
+                </label>
+              </div>
+            </div>
 
-            {/* Photo URL  */}
-            <label className="label">Photo URL</label>
-            <input
-              name="photo"
-              type="text"
-              className="input font-semibold"
-              placeholder="Photo URL"
-              required
-            />
-            {/* email  */}
-            <label className="label">Email</label>
+            {/* Email */}
+            <label className="label mt-2">Email</label>
             <input
               name="email"
               type="email"
@@ -131,8 +203,9 @@ const Register = () => {
               placeholder="Email"
               required
             />
-            {/* passowrd  */}
-            <label className="label">Password</label>
+
+            {/* Password */}
+            <label className="label mt-2">Password</label>
             <input
               name="password"
               type="password"
@@ -140,14 +213,18 @@ const Register = () => {
               placeholder="Password"
               required
             />
+
+            {/* Submit */}
             <button
               type="submit"
               className="btn btn-neutral mt-3 bg-[#2f2f2f] hover:bg-black duration-300"
             >
               Register
             </button>
+
+            {/* Login Link */}
             <p className="font-semibold text-center pt-4">
-              Already Have An Account ?
+              Already Have An Account?
               <Link
                 className="ml-1 hover:underline text-green-900"
                 to="/auth/login"
