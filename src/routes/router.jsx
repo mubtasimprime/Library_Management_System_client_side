@@ -16,6 +16,7 @@ import CategoryBookPage from "../pages/CategoryBookPage";
 import UpdateBookData from "../components/UpdateBookData";
 import BookDetails from "../components/BookDetails";
 import Profile from "../components/Profile";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,15 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [{ index: true,element: }],
   },
 ]);
 
