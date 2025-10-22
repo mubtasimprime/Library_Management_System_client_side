@@ -132,7 +132,7 @@ const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
-    children: [{ index: true,element: }],
+    // children: [{ index: true,element: }],
   },
 ]);
 
