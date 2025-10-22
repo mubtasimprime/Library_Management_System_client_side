@@ -15,6 +15,7 @@ import axios from "axios";
 import CategoryBookPage from "../pages/CategoryBookPage";
 import UpdateBookData from "../components/UpdateBookData";
 import BookDetails from "../components/BookDetails";
+import Profile from "../components/Profile";
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <BorrowedBooks></BorrowedBooks>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
           </PrivateRoute>
         ),
       },

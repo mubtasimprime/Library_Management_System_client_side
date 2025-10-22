@@ -62,11 +62,6 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
       // console.log(currentUser);
-      axios.get(`${import.meta.env.VITE_API_URL}`, {
-        headers: {
-          Authorization: `Bearer ${currentUser.accessToken}`,
-        },
-      });
     });
     return () => {
       unsubcribe();

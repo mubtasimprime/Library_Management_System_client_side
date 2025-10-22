@@ -154,26 +154,37 @@ const Navbar = () => {
 
       {/* Right Side Buttons */}
       <div className="navbar-end gap-4 flex items-center">
-        {user && (
-          <div
-            className="avatar tooltip tooltip-bottom"
-            data-tip={user?.displayName || "Guest"}
-          >
-            <div className="w-7 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-              <img
-                src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
-                alt="User Avatar"
-              />
-            </div>
-          </div>
-        )}
-
         {user ? (
-          <motion.div whileHover={hoverEffect} whileTap={tapEffect}>
-            <button onClick={handleLogout} className="navbar-btn">
-              Logout
-            </button>
-          </motion.div>
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="avatar btn btn-ghost btn-circle"
+            >
+              <div
+                className="w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100"
+                data-tip={user?.displayName || "User"}
+              >
+                <img
+                  src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
+                  alt="User Avatar"
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="/profile" className="justify-between">
+                  My Profile
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleLogout}>Logout</button>
+              </li>
+            </ul>
+          </div>
         ) : (
           <>
             <motion.div whileHover={hoverEffect} whileTap={tapEffect}>
