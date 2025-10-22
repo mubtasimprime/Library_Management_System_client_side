@@ -24,6 +24,10 @@ https://library-management-6a442.web.app
   - Responsive design for all device sizes
   - Interactive notifications and alerts
   - Clean, modern UI with easy navigation
+  - **New Feature**:
+  - Profile Update Feature
+  - Search book feature
+  - Pagination feature
 
 ## Technologies Used
 
