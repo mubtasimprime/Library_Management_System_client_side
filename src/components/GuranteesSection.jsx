@@ -10,7 +10,7 @@ const GuaranteesSection = () => {
           initial={{ x: -10, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 60, damping: 12 }}
-          className="text-2xl md:text-4xl font-bold text-gray-800 mb-4"
+          className="text-2xl md:text-4xl font-bold text-gray-800 mb-4 text-center"
         >
           Customer Shopping <span className="text-blue-600">Experience</span>
         </motion.h1>
@@ -18,7 +18,7 @@ const GuaranteesSection = () => {
           initial={{ x: 10, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 60, damping: 12 }}
-          className="text-gray-600 max-w-6xl"
+          className="text-gray-600 max-w-6xl text-center"
         >
           We prioritize your satisfaction with our transparent policies and
           secure shopping environment. Enjoy peace of mind with our guarantees,

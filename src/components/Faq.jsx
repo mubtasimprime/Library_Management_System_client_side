@@ -10,7 +10,7 @@ const Faq = () => {
             initial={{ x: -10, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 60, damping: 12 }}
-            className="text-2xl md:text-4xl font-bold"
+            className="text-2xl md:text-4xl font-bold text-center"
           >
             Frequently Asked <span className="text-blue-600">Questions</span>
           </motion.h1>
@@ -18,7 +18,7 @@ const Faq = () => {
             initial={{ x: 10, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 60, damping: 12 }}
-            className="text-gray-700 text-base mt-4"
+            className="text-gray-700 text-base mt-4 text-center"
           >
             We have answers (well, most of the times!)
           </motion.p>
